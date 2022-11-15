@@ -1,17 +1,17 @@
 #include "Airport.h"
 
 Airport::Airport(){
-    id = 0;
-    name = "";
-    latitude = 0.0;
-    longitude = 0.0;
+    id_ = 0;
+    name_ = "";
+    latitude_ = 0.0;
+    longitude_ = 0.0;
 }
 
-Airport::Airport(int id, string name, double latitude, double longitude) {
+Airport::Airport(int id, std::string name, double latitude, double longitude) {
     id_ = id;
     name_ = name;
     latitude_ = latitude;
-    longitude = longtitude_;
+    longitude = longitude_;
 }
 
 std::string Airport::getName() {
@@ -22,24 +22,24 @@ int Airport::getID() {
     return id_;
 }
 
-int Airport::getLatitude() {
+double Airport::getLatitude() {
     return latitude_;
 }
 
-int Airport::getLongitude() {
-    return latitude_;
+double Airport::getLongitude() {
+    return longitude_;
 }
 
 void Airport::setId(int id) {
     id_ = id;
 
 }
-void setName(std::string name) {
+void Airport::setName(std::string name) {
     name_ = name;
 }
-void setLatitude(int latitude) {
+void Airport::setLatitude(int latitude) {
     latitude_ = latitude;
 }
-void setLongitude(int longitude) {
+void Airport::setLongitude(int longitude) {
     longitude_ = longitude;
 }

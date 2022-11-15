@@ -20,5 +20,5 @@ class Airport {
     int id_;
     std::string name_;
     double latitude_; 
-    double longtitude_;
+    double longitude_;
 };
