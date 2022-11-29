@@ -1,4 +1,52 @@
 #include "Airport.h"
+#include <string>
+
+using namespace std;
+
+Airport::Airport(vector<string> vec){
+    id_ = stoi(vec[0], nullptr);
+    name_ = vec[1];
+    latitude_ = stod(vec[6], nullptr);
+    longitude_ = stod(vec[7], nullptr);
+}
+
+Airport::Airport(string &line) {
+    std::string str = "";
+    std::vector<std::string> vector;
+    bool q = false;
+
+    for(size_t i = 0; i < line.size(); ++i){
+        char curr = line[i];
+        if(!q) {
+            if(curr == ',') {
+                vector.push_back(str);
+                str = "";
+            }
+            else if(curr == '"') {
+                     q = true;
+            }
+            str += curr;
+        }
+        else {
+            if (curr == '"' && i+1 < line.size()) {
+                if(line[i+1] == '"') {
+                    str += '"';
+                    i++;
+                }
+                else {
+                    q = false;
+
+                }
+            }
+            str += curr;
+        }
+    }
+    
+    id_ = stoi(vector[0], nullptr);
+    name_ = vector[1];
+    latitude_ = stod(vector[6], nullptr);
+    longitude_ = stod(vector[7], nullptr);
+}
 
 Airport::Airport(){
     id_ = 0;
