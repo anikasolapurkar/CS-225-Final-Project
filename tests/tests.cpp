@@ -1,12 +1,44 @@
-
-#include <fstream>
-#include <vector>
-#include <algorithm>
-#include <string>
 #include <iostream>
-#include <sstream>
+#include <vector>
+#include <string>
 
 #include "../Airport.h"
+#include "../Djikstras.h"
+#include "../BFS.h"
+
+#include "../catch/catch.hpp"
+
+using namespace std;
+
+TEST_CASE("Testing Airport constructor with vector") { 
+    cout<<"Testing vector constructor with Goroka Airport"<<endl;
+    vector<string> data = {"1","Goroka Airport","","", "", "", "-6.081689834590001,", "145.391998291"};
+    arr["Goroka Airport"] = Airport(data);
+    string name = arr["Goroka Airport"].getName();
+    int id = arr["Goroka Airport"].getID();
+    int latitude = (int)arr["Goroka Airport"].getLatitude();
+    int longitude = (int)arr["Goroka Airport"].getLongitude();
+
+    REQUIRE(1 == id);
+    REQUIRE("Goroka Airport" == name);
+    REQUIRE(-6 == latitude);
+    REQUIRE(145 == longitude);
+}
+
+TEST_CASE("Testing Airport constructor with string") { 
+    cout<<"Testing string constructor with Madang Airport"<<endl;
+    string madang = "2,\"Madang Airport\",\"Madang",\"Papua New Guinea\",\"MAG\",\"AYMD\",-5.20707988739,145.789001465,20,10,\"U\",\"Pacific/Port_Moresby\",\"airport\",\"OurAirports\"";
+    vec["Madang Airport"] = Airport(madang);
+    int id = (vec["Madang Airport"].getID());
+    string name = (vertices["Madang Airport"].getName());
+    int latitude = (int)vertices["Madang Airport"].getLatitude();
+    int longitude = (int)vertices["Madang Airport"].getLongitude();
+    
+    REQUIRE(2 == id);
+    REQUIRE("Madang Airport" == name);
+    REQUIRE(-5 == latitude);
+    REQUIRE(145 == longitude);
+}
 
 std::vector<Airport> readAirportCSV(std::string filename) {
     std::vector<Airport> airports;
@@ -34,8 +66,6 @@ std::vector<Airport> readAirportCSV(std::string filename) {
         // Airport ap(id, name, lat, longi);
         // airports.push_back(ap);
     }
-
-    
     // Close the File
     infile.close();
     return airports;
