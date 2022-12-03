@@ -101,8 +101,15 @@ Route Graph::createEdge(vector<std::string> flightVector) {
 
 }   
 
-//NOT DONE
-void Graph::insertEdge(Route f){}
+//DONE
+void Graph::insertEdge(Route r){
+    int source = r.getSourceId();
+    int destination = r.getDestId();
+
+    if (vertices[source].destAPs.find(destination) == vertices[source].destAPs.end())   
+        (vertices[source].destAPs)[destination] = r;
+
+}
 
 
 //DONE

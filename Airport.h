@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <unordered_map>
+#include "Routes.h"
 
 class Airport {
     public:
@@ -20,6 +22,8 @@ class Airport {
         void setName(std::string name);
         void setLatitude(int latitude);
         void setLongitude(int longitude);
+
+        unordered_map<int, Route> destAPs;
 
     private:
         int id_;

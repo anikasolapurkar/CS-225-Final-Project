@@ -23,7 +23,7 @@ class Graph {
         //functions to create and insert edges
         vector<string> createEdgeHelper(string & line);
         Route createEdge(vector<string> flightVector);     
-        void insertEdge(Route f);
+        void insertEdge(Route r);
         void insertAllEdge(std::string & fileName);
         
         //functions that return private maps for debugging
