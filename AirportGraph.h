@@ -16,12 +16,12 @@ class Graph {
         //constructor that accepts the airport and routes.dat files
         Graph(string & airportFile, string & routesFile);
         
-        //functions to insert vertices
+        //functions to insert vertices with airport id and aiport object in it
         void insertVertex(int v, Airport ap);
         void insertAllVertices(std::string & fileName);
         
         //functions to create and insert edges
-        vector<string> _createEdge(string & line);
+        vector<string> createEdgeHelper(string & line);
         Route createEdge(vector<string> flightVector);     
         void insertEdge(Route f);
         void insertAllEdge(std::string & fileName);
@@ -32,7 +32,9 @@ class Graph {
         // string getAPName(int ID);
         
         //function to harvest adjmatrix from a graph obj
-        void adjMatrix(PageRank* pr_obj);
+        
+        //ADD BACK
+        //void adjMatrix(PageRank* pr_obj);
 
 
     private:
