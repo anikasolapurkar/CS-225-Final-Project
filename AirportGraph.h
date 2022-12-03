@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include "Airport.h"
+#include "Routes.h"
 #include "PageRank.h"
 
 using namespace std;
@@ -21,17 +22,17 @@ class Graph {
         
         //functions to create and insert edges
         vector<string> _createEdge(string & line);
-        Airport createEdge(vector<string> flightVector);     
-        void insertEdge(Airport f);
+        Route createEdge(vector<string> flightVector);     
+        void insertEdge(Route f);
         void insertAllEdge(std::string & fileName);
         
         //functions that return private maps for debugging
-        unordered_map<int, Airport> getVertices();
-        unordered_map<int, Airport> adjVertWithWeight(int airportID);
-        string getAPName(int ID);
+        // unordered_map<int, Airport> getVertices();
+        // unordered_map<int, Route> adjVertWithWeight(int airportID);
+        // string getAPName(int ID);
         
         //function to harvest adjmatrix from a graph obj
-        //void adjMatrix(PageRank* pr_obj);
+        void adjMatrix(PageRank* pr_obj);
 
 
     private:
