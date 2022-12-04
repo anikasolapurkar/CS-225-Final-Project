@@ -39,7 +39,7 @@ class Graph {
 
     private:
         //functions that calculate the weight of an edge
-        double calcWeight(int fromID, int toID);
+        double calcWeight(long double lat1, long double long1, long double lat2, long double long2);
         double radianConvert(double degree);
         
         //each graph object hosts a map of airports to its corresponding ID

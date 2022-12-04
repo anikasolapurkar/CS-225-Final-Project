@@ -11,8 +11,6 @@
 class Airport {
     public:
         Airport();
-        Airport::Airport(string &line);
-        Airport::Airport(vector<string> airportVector);
         Airport(int id, std::string name, double latitude, double longitude);
         std::string getName();
         int getID();
@@ -22,8 +20,6 @@ class Airport {
         void setName(std::string name);
         void setLatitude(int latitude);
         void setLongitude(int longitude);
-
-        unordered_map<int, Route> destAPs;
 
     private:
         int id_;
