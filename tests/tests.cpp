@@ -7,7 +7,7 @@
 #include "../BFS.h"
 
 #include "../catch/catch.hpp"
-
+ 
 using namespace std;
 
 TEST_CASE("Testing Airport constructor with vector") { 
@@ -39,6 +39,54 @@ TEST_CASE("Testing Airport constructor with string") {
     REQUIRE(-5 == latitude);
     REQUIRE(145 == longitude);
 }
+
+TEST_CASE("Testing Pagerank function createadjacency()") {
+    PageRank *p_r = new PageRank();
+    int size = 2;
+    p_r->adjacency.resize(size,vector<double>(size));
+
+    p_r->A[0][0] = 0.0;
+    p_r->A[1][0] = 0.0;
+
+    p_r->A[0][1] = 4.0;   
+    p_r->A[1][1] = 6.0;  
+
+    p_r->airport_id.resize(size);
+    p_r->num = size;
+
+    p_r->PageRank::createadjacency(size, 0.85);
+    REQUIRE(0.5 == p_r->adjacency[0][0]);
+    REQUIRE(0.5 == p_r->adjacency[1][0]);
+    REQUIRE(1 == p_r->adjacency[0][1] + p_r->adjacency[1][1]);
+}
+
+TEST_CASE("Testing Pagerank function bestairport()") { 
+    cout << "\n\n\n\n >>>>>>>>Testing Pagerank function top_airport()\n" << endl;
+    PageRank *p_r = new PageRank(); 
+    p_r->airport_id.resize(5);
+    p_r->page_rank.resize(5);
+
+    p_r->airport_id[0] = 0;
+    p_r->airport_id[1] = 1;
+    p_r->airport_id[2] = 2;
+    p_r->airport_id[3] = 3;
+    p_r->airport_id[4] = 4;
+
+    p_r->page_rank[0] = 0.245;
+    p_r->page_rank[1] = 324.15;
+    p_r->page_rank[2] = 23.21;
+    p_r->page_rank[3] = 56.33;
+    p_r->page_rank[4] = 4;
+
+    //pick out the top 3 airport's id
+    vector<int> rank = p_r->top_airport(3); 
+    REQUIRE(1 == rank[0]);
+    REQUIRE(3 == rank[1]);
+    REQUIRE(2 == rank[2]);
+}
+
+
+
 
 std::vector<Airport> readAirportCSV(std::string filename) {
     std::vector<Airport> airports;

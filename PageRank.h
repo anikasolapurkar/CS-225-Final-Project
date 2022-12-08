@@ -5,6 +5,7 @@ using namespace std;
 
 class PageRank {
     public:
+    PageRank();
     void createadjacency(int n double d); 
     vector<double> rank(vector<double> init, int t, bool  store);
     vector<int> bestairport(int num);

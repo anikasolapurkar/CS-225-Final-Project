@@ -3,6 +3,8 @@
 #include <vector>
 #include <numeric>
 
+//default constructor 
+PageRank::PageRank(){}
 
 //initalizes the intitial vector passed into PageRank
 vector<double> PageRank::vec_initial(){
