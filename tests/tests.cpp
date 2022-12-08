@@ -45,11 +45,11 @@ TEST_CASE("Testing Pagerank function createadjacency()") {
     int size = 2;
     p_r->adjacency.resize(size,vector<double>(size));
 
-    p_r->A[0][0] = 0.0;
-    p_r->A[1][0] = 0.0;
+    p_r->adjacency[0][0] = 0.0;
+    p_r->adjacency[1][0] = 0.0;
 
-    p_r->A[0][1] = 4.0;   
-    p_r->A[1][1] = 6.0;  
+    p_r->adjacency[0][1] = 4.0;   
+    p_r->adjacency[1][1] = 6.0;  
 
     p_r->airport_id.resize(size);
     p_r->num = size;
