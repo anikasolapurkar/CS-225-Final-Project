@@ -16,7 +16,7 @@ vector<double> PageRank::vec_initial(){
 //adjusts the adjacency matrix 
 void PageRank::createadjacency(int num, double d) {
     this->num = num;
-    double factor = (1-d)/n;
+    double factor = (1-d)/num;
     for(int i = 0; i < num; i++){
         double sum = 0;
         for(int j = 0; j < num; j++){
@@ -24,32 +24,32 @@ void PageRank::createadjacency(int num, double d) {
         }     
         if(sum == 0){
             for(int j = 0; j < num; j++){
-                adjacency[j][i] = 1/(double)n;
+                adjacency[j][i] = 1/(double)num;
             }              
         }
 
         for(int j = 0; j < num; j++){
-            adjacency[j][i] = (adjacency[j][i]/sum)*d+factor;
+            adjacency[j][i] = (adjacency[j][i]/sum)*(d+factor);
         }             
     }
 }
 
 //perform pagerank algorithm and stores result in vector
-vector<double> PageRank::rank(vector<double> initial, int t, bool store) {
+vector<double> PageRank::rank(vector<double> initial, int time, bool store) {
     vector<double> vec = init;
     vector<double> vec2 = init;
-    for(int t = 0; t < t; t++){
+    for(int t = 0; t < time; t++){
         for(int i = 0; i < num; i++){
             vec2[i] = 0;
             for(int j = 0; j < num; j++){
                 vec2[i] += adjacency[i][j] * vec[j];
                 if(store) {
                     double sum = 0;
-                    for(std::vector<double>::iterator it = vec2.begin(); it != vec2.end(); ++it)
+                    for(std::vector<double>::iterator it = vec2.begin(); it != vec2.end(); it++)
                         sum += (*it)*(*it);
                         double s = sqrt(sum);
-                    for(int n = 0; n < num; n++){
-                        vec2[n] = vec2[n] / s;
+                    for(int k = 0; k < num; k++){
+                        vec2[k] = vec2[k] / s;
                     }
                 }
             }     
