@@ -61,7 +61,7 @@ TEST_CASE("Testing Pagerank function createadjacency()") {
 }
 
 TEST_CASE("Testing Pagerank function bestairport()") { 
-    cout << "\n\n\n\n >>>>>>>>Testing Pagerank function top_airport()\n" << endl;
+    cout << "\n\n\n\n >>>>>>>>Testing Pagerank function bestairport()\n" << endl;
     PageRank *p_r = new PageRank(); 
     p_r->airport_id.resize(5);
     p_r->page_rank.resize(5);
@@ -79,7 +79,7 @@ TEST_CASE("Testing Pagerank function bestairport()") {
     p_r->page_rank[4] = 4;
 
     //pick out the top 3 airport's id
-    vector<int> rank = p_r->top_airport(3); 
+    vector<int> rank = p_r->bestairport(3); 
     REQUIRE(1 == rank[0]);
     REQUIRE(3 == rank[1]);
     REQUIRE(2 == rank[2]);
