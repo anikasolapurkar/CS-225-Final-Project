@@ -11,7 +11,7 @@ class PageRank {
     vector<double> vec_initial();
     void print_adjmatrix();
     void print_result();
-     vector<int> airport_id; 
+    vector<int> airport_id; 
     vector<vector<double>> adjacency; 
     vector<double> page_rank; 
     int num;
