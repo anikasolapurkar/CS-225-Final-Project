@@ -1,6 +1,6 @@
 lib/CMakeFiles/lodepng.dir/lodepng/lodepng.cpp.o: \
-  /workspaces/final/CS-225-Final-Project/lib/lodepng/lodepng.cpp \
-  /workspaces/final/CS-225-Final-Project/lib/lodepng/lodepng.h \
+  /workspaces/cs225-final-project/CS-225-Final-Project/lib/lodepng/lodepng.cpp \
+  /workspaces/cs225-final-project/CS-225-Final-Project/lib/lodepng/lodepng.h \
   /usr/include/string.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h /usr/include/features-time64.h \
