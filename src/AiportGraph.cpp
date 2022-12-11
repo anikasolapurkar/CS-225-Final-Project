@@ -135,14 +135,40 @@ void Graph::insertAllEdge(std::string & fileName){
     }
 }
 
+
+//NEXT THREE RETURN GRAPH
+unordered_map<int, Airport> Graph::getVertices(){
+    return vertices;
+}
+
+
+//returns the flights coming out of the given airport
+//for testing: iterate though the unordered_map to see inserted flights
+unordered_map<int, Route> Graph::adjVertWithWeight(int airportID) {
+    auto it = vertices.find(airportID);
+    if(it != vertices.end()){
+        Airport& ap = vertices[airportID];
+        return ap.destAPs;
+    }
+    return unordered_map<int, Route> ();
+}
+
+string Graph::getAPName(int ID){
+    auto it = vertices.find(ID);
+    if(it != vertices.end()){
+        return vertices[ID].getName();
+    }
+    return string();
+}
+
 //DONE
-double calcWeight(long double lat1, long double long1, long double lat2, long double long2) {
-    lat1 = toRadians(lat1);
-    long1 = toRadians(long1);
-    lat2 = toRadians(lat2);
-    long2 = toRadians(long2);
+double Graph::calcWeight(int source, int dest) {
+    double lat1 = radianConvert(vertices[source].getLatitude());
+    double lon1 = radianConvert(vertices[source].getLongitude());
+    double lat2 = radianConvert(vertices[dest].getLatitude());
+    double lon2 = radianConvert(vertices[dest].getLongitude());
      
-    long double dlong = long2 - long1;
+    long double dlong = lon2 - lon1;
     long double dlat = lat2 - lat1;
  
     long double ans = pow(sin(dlat / 2), 2) + cos(lat1) * cos(lat2) * pow(sin(dlong / 2), 2);

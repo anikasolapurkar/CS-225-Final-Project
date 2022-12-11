@@ -27,21 +27,23 @@ class Graph {
         void insertAllEdge(std::string & fileName);
         
         //functions that return private maps for debugging
-        // unordered_map<int, Airport> getVertices();
-        // unordered_map<int, Route> adjVertWithWeight(int airportID);
-        // string getAPName(int ID);
+        unordered_map<int, Airport> getVertices();
+        unordered_map<int, Route> adjVertWithWeight(int airportID);
+        string getAPName(int ID);
         
         //function to harvest adjmatrix from a graph obj
         
         //ADD BACK
         //void adjMatrix(PageRank* pr_obj);
 
+        unordered_map<int, Airport> vertices;
+
 
     private:
         //functions that calculate the weight of an edge
-        double calcWeight(long double lat1, long double long1, long double lat2, long double long2);
+        double calcWeight(int source, int dest);
         double radianConvert(double degree);
         
         //each graph object hosts a map of airports to its corresponding ID
-        unordered_map<int, Airport> vertices;
+        
 };
