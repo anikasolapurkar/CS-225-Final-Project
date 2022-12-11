@@ -1,6 +1,6 @@
 # CS 225 Final Project: OpenFlights
 ## Team Members: akansal3-amehta58-jsh7-anikaas2
-## Deliverables **also located in the main branch**
+## Deliverables **(also located in the main branch)**
 * Final Report
 * Final Presentation Slides
 * Final Presentation Video
