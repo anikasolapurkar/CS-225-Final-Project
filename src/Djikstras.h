@@ -1,7 +1,7 @@
 #pragma once
-#include "airport_graph.h"
-#include "Flight.h"
-#include "Airport.h"
+// #include "airport_graph.h"
+// #include "Flight.h"
+// #include "Airport.h"
 
 #include <vector>
 #include <map>
@@ -14,15 +14,8 @@ using namespace std;
 
 class Djikstras {
     public:
-        Djikstras (Graph g, string StartAirport, string DestAirport);
-        double getShortestDistance() const;
-        vector<pair<int, double>> getAdjacent(string Source);
+        std::vector<int> finalvector(int currentVertex, std::vector<int> parents);
+        std::vector<int> dijkstra(std::vector<std::vector<int>> adjacencyMatrix, int startVertex, int destination);
     private:
-        map<string, double> distances;
-        unordered_map<string, string> previous_nodes;
-        priority_queue<pair<double, string>, vector<pair<double, string>>,greater<pair<double, string>> > Q;
-        unordered_map <string, bool> visited; 
-        double path;
-        unordered_map<string, unordered_map<int, Flight> > adjacency_list;
-        vector<string> path_vertices;
+        
 };

@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -15,11 +13,29 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    std::cout << "testingtestingtesting" << std::endl;
-    vector<string> data = {"1","Goroka Airport","","", "", "", "-6.081689834590001,", "145.391998291"};
-    Airport a;
+    // std::cout << "testingtestingtesting" << std::endl;
+    // vector<string> data = {"1","Goroka Airport","","", "", "", "-6.081689834590001,", "145.391998291"};
+    // Airport a;
     
+    // return 0;
+    Djikstras d;
+    vector<vector<int> > adjacencyMatrix
+        = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+            { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+            { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
+            { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
+            { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
+            { 0, 0, 4, 0, 10, 0, 2, 0, 0 },
+            { 0, 0, 0, 14, 0, 2, 0, 1, 6 },
+            { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
+            { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
+    std::vector<int> result;
+    result = d.dijkstra(adjacencyMatrix, 0, 3);
+    for (unsigned i = 0; i < result.size(); i++) {
+      std::cout << result[i] << std::endl;
+    }
     return 0;
+<<<<<<< Updated upstream
 
     TEST_CASE("Testing BFS_moves") {
     
@@ -42,3 +58,6 @@ int main(int argc, char** argv)
     REQUIRE("Chicago O'Hare International Airport" == result_moves[0]);
 }
 }
+=======
+}
+>>>>>>> Stashed changes

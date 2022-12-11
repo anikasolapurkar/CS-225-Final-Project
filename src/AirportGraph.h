@@ -8,7 +8,7 @@
 #include "PageRank.h"
 
 using namespace std;
-
+ 
 class Graph {
     public:
         //default constructor
