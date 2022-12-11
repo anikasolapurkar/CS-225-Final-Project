@@ -40,50 +40,49 @@ using namespace std;
 //     REQUIRE(145 == longitude);
 // }
 
-// TEST_CASE("Testing Pagerank function createadjacency()") {
-//     PageRank *p_r = new PageRank();
-//     int size = 2;
-//     p_r->adjacency.resize(size,vector<double>(size));
+TEST_CASE("Testing Pagerank function createadjacency()") {
+      PageRank *p_r = new PageRank();
+      int size = 2;
+      p_r->adjacency.resize(size,vector<double>(size));
+      p_r->adjacency[0][0] = 0.0;
+      p_r->adjacency[1][0] = 0.0;
 
-//     p_r->adjacency[0][0] = 0.0;
-//     p_r->adjacency[1][0] = 0.0;
+       p_r->adjacency[0][1] = 4.0;   
+       p_r->adjacency[1][1] = 6.0;  
 
-//     p_r->adjacency[0][1] = 4.0;   
-//     p_r->adjacency[1][1] = 6.0;  
+        p_r->airport_id.resize(size);
+     p_r->num = size;
 
-//     p_r->airport_id.resize(size);
-//     p_r->num = size;
+     p_r->PageRank::createadjacency(size, 0.85);
+    REQUIRE(0.5 == p_r->adjacency[0][0]);
+     REQUIRE(0.5 == p_r->adjacency[1][0]);
+     REQUIRE(1 == p_r->adjacency[0][1] + p_r->adjacency[1][1]);
+ }
 
-//     p_r->PageRank::createadjacency(size, 0.85);
-//     REQUIRE(0.5 == p_r->adjacency[0][0]);
-//     REQUIRE(0.5 == p_r->adjacency[1][0]);
-//     REQUIRE(1 == p_r->adjacency[0][1] + p_r->adjacency[1][1]);
-// }
+ TEST_CASE("Testing Pagerank function bestairport()") { 
+     cout << "\n\n\n\n >>>>>>>>Testing Pagerank function bestairport()\n" << endl;
+     PageRank *p_r = new PageRank(); 
+     p_r->airport_id.resize(5);
+    p_r->page_rank.resize(5);
 
-// TEST_CASE("Testing Pagerank function bestairport()") { 
-//     cout << "\n\n\n\n >>>>>>>>Testing Pagerank function bestairport()\n" << endl;
-//     PageRank *p_r = new PageRank(); 
-//     p_r->airport_id.resize(5);
-//     p_r->page_rank.resize(5);
+    p_r->airport_id[0] = 0;
+     p_r->airport_id[1] = 1;
+    p_r->airport_id[2] = 2;
+    p_r->airport_id[3] = 3;
+    p_r->airport_id[4] = 4;
 
-//     p_r->airport_id[0] = 0;
-//     p_r->airport_id[1] = 1;
-//     p_r->airport_id[2] = 2;
-//     p_r->airport_id[3] = 3;
-//     p_r->airport_id[4] = 4;
+     p_r->page_rank[0] = 0.245;
+     p_r->page_rank[1] = 324.15;
+     p_r->page_rank[2] = 23.21;
+    p_r->page_rank[3] = 56.33;
+    p_r->page_rank[4] = 4;
 
-//     p_r->page_rank[0] = 0.245;
-//     p_r->page_rank[1] = 324.15;
-//     p_r->page_rank[2] = 23.21;
-//     p_r->page_rank[3] = 56.33;
-//     p_r->page_rank[4] = 4;
-
-//     //pick out the top 3 airport's id
-//     vector<int> rank = p_r->bestairport(3); 
-//     REQUIRE(1 == rank[0]);
-//     REQUIRE(3 == rank[1]);
-//     REQUIRE(2 == rank[2]);
-// }
+     //pick out the top 3 airport's id
+     vector<int> rank = p_r->bestairport(3); 
+     REQUIRE(1 == rank[0]);
+    REQUIRE(3 == rank[1]);
+     REQUIRE(2 == rank[2]);
+ }
 
 TEST_CASE("Testing Dijkstras: Path exists between two nodes, [Part = 1]") {
     Djikstras d;
