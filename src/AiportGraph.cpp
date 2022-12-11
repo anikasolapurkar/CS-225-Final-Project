@@ -1,4 +1,6 @@
 #include "AirportGraph.h"
+#include "PageRank.h"
+
 #include <math.h> 
 #include <vector>
 #include <string>
@@ -180,7 +182,61 @@ double Graph::calcWeight(int source, int dest) {
 }
 
 //DONE
-double radianConvert(double degree) {
+double Graph::radianConvert(double degree) {
     long double one_deg = (M_PI) / 180;
     return (one_deg * degree);
+}
+
+
+
+
+void Graph::adjMatrix(PageRank *pr_obj){
+
+    //determine and set the dimention
+    int size = vertices.size();
+    pr_obj->adjacency.resize(size,vector<double>(size));
+    pr_obj->airport_id.resize(size);
+    pr_obj->num = size;
+
+
+    //initialize obj matrix
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < size; j++){
+            pr_obj->adjacency[i][j] = 0.0;
+        }        
+    }
+
+    //populate the namelist of pagerank obj
+    int x = 0;
+    for(auto it = vertices.begin(); it != vertices.end(); ++it){
+        if(it->second.getID() == 0){
+            continue;
+        }
+        pr_obj->airport_id[x] = (it->second.getID());
+        x++;     
+    }
+    
+
+    //check every flight of every airport
+    //put the weight into the adj matrix according to the order of the namelist
+    x = 0;
+    for(auto it = vertices.begin(); it != vertices.end(); ++it){
+        if(x == size) break;
+        if(it->second.getID() == 0){
+            continue;
+        }
+
+        //check the flights of the current vertices/airport
+        for(auto flight = it->second.destAPs.begin(); flight != it->second.destAPs.end(); ++flight){
+            int y = 0;
+            //find out the proper place for the weight of the current flight according to the namelist
+            for (auto temp = pr_obj->airport_id.begin(); temp != pr_obj->airport_id.end(); ++temp) {
+                if (*temp == flight->second.getDestId()) break;
+                y++;
+            } 
+            if(y == size) break;
+            pr_obj->adjacency[y][x] = flight->second.getWeight();
+        }
+        x++;
+    }
 }
