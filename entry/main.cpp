@@ -18,26 +18,22 @@ int main(int argc, char** argv)
     // Airport a;
     
     // return 0;
-    Djikstras d;
-    vector<vector<int> > adjacencyMatrix
-        = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
-            { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
-            { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
-            { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
-            { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
-            { 0, 0, 4, 0, 10, 0, 2, 0, 0 },
-            { 0, 0, 0, 14, 0, 2, 0, 1, 6 },
-            { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
-            { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
-    std::vector<int> result;
-    result = d.dijkstra(adjacencyMatrix, 0, 3);
-    for (unsigned i = 0; i < result.size(); i++) {
-      std::cout << result[i] << std::endl;
-    }
-    return 0;
-<<<<<<< Updated upstream
-
-    TEST_CASE("Testing BFS_moves") {
+    // Djikstras d;
+    // vector<vector<int> > adjacencyMatrix
+    //     = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
+    //         { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
+    //         { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
+    //         { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
+    //         { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
+    //         { 0, 0, 4, 0, 10, 0, 2, 0, 0 },
+    //         { 0, 0, 0, 14, 0, 2, 0, 1, 6 },
+    //         { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
+    //         { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
+    // std::vector<int> result;
+    // result = d.dijkstra(adjacencyMatrix, 0, 3);
+    // for (unsigned i = 0; i < result.size(); i++) {
+    //   std::cout << result[i] << std::endl;
+    // }
     
     cout << "testing BFS_moves" << endl;
     string airportFile = "airports.dat";
@@ -54,10 +50,6 @@ int main(int argc, char** argv)
     }
     cout << endl;
 
-    REQUIRE(51 == result_moves.size());
-    REQUIRE("Chicago O'Hare International Airport" == result_moves[0]);
+    std::cout << (51 == result_moves.size()) << std::endl;
+    std::cout << ("Chicago O'Hare International Airport" == result_moves[0]) << std::endl;
 }
-}
-=======
-}
->>>>>>> Stashed changes
