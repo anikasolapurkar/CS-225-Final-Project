@@ -10,72 +10,6 @@
  
 using namespace std;
 
-<<<<<<< Updated upstream
-TEST_CASE("Testing Airport constructor with vector") { 
-    cout<<"Testing vector constructor with Goroka Airport"<<endl;
-    vector<string> data = {"1","Goroka Airport","","", "", "", "-6.081689834590001,", "145.391998291"};
-    arr["Goroka Airport"] = Airport(data);
-    string name = arr["Goroka Airport"].getName();
-    int id = arr["Goroka Airport"].getID();
-    int latitude = (int)arr["Goroka Airport"].getLatitude();
-    int longitude = (int)arr["Goroka Airport"].getLongitude();
-
-    REQUIRE(1 == id);
-    REQUIRE("Goroka Airport" == name);
-    REQUIRE(-6 == latitude);
-    REQUIRE(145 == longitude);
-}
-
-TEST_CASE("Testing Pagerank implementation on a subset of the whole data set") { 
-    //adjust the precision of the weight of edge to be shown
-    cout << setprecision(10);
-    cout << "\n\n\n\n >>>>>>>>Testing constructing graph from a subset of data and pagerank on the data set\n" << endl;
-    string airportFile = "tests/airport_sample.dat";
-    string routesFile = "tests/routes_sample.dat";
-    Graph airportGraph(airportFile, routesFile);
-    unordered_map<int, Airport> airportMap = airportGraph.getVertices();x
-    //printing out all flights departing from O'Hare, Newark and Beijing airport
-    for(auto it = airportMap.begin(); it != airportMap.end(); ++it){
-        cout << "Airport ID: " << it->first <<endl;
-        if(it->first == 3830 || it->first == 3494 || it->first == 3364){
-            cout << "Airport ID: " <<it->second.getID() << " ";
-            cout << "Airport Name: " <<it->second.getName() << endl;
-        }
-    }
-    cout << "\n";
-    PageRank *test = new PageRank();                      //create pagerank obj                 
-    test->createadjacency(test->num, 0.85);               //create adjmatrix
-    test->print_adjmatrix();                              //print matrix
-    vector<double> init = test->vec_initial();            //generate initial vector 
-    vector<double> vec = test->rank(init, 100, true);     //perform pagerank alg, 5 iteration
-    test->print_result();                                 //print result
-    vector<int> ranking = test->top_airport(5);           //pickout the top 5 important airport
-
-    REQUIRE(3364 == ranking[0]);
-    REQUIRE(3728 == ranking[1]);
-}
-
-
-
-TEST_CASE("Testing Pagerank function createadjacency()") {
-    PageRank *p_r = new PageRank();
-    int size = 2;
-    p_r->adjacency.resize(size,vector<double>(size));
-
-    p_r->adjacency[0][0] = 0.0;
-    p_r->adjacency[1][0] = 0.0;
-
-    p_r->adjacency[0][1] = 4.0;   
-    p_r->adjacency[1][1] = 6.0;  
-
-    p_r->airport_id.resize(size);
-    p_r->num = size;
-
-    p_r->PageRank::createadjacency(size, 0.85);
-    REQUIRE(0.5 == p_r->adjacency[0][0]);
-    REQUIRE(0.5 == p_r->adjacency[1][0]);
-    REQUIRE(1 == p_r->adjacency[0][1] + p_r->adjacency[1][1]);
-=======
 // TEST_CASE("Testing Airport constructor with vector") { 
 //     cout<<"Testing vector constructor with Goroka Airport"<<endl;
 //     vector<string> data = {"1","Goroka Airport","","", "", "", "-6.081689834590001,", "145.391998291"};
@@ -169,7 +103,6 @@ TEST_CASE("Testing Dijkstras: Path exists between two nodes, [Part = 1]") {
     REQUIRE(expected[0] == result[0]);
     REQUIRE(expected[1] == result[1]);
     REQUIRE(expected[2] == result[2]);
->>>>>>> Stashed changes
 }
 
 TEST_CASE("Testing Dijkstras: Path exists between two nodes, [Part = 2]") {
@@ -198,23 +131,8 @@ TEST_CASE("Testing Dijkstras: Path exists between two nodes, [Part = 2]") {
 //     std::vector<std::string> test;
 //     std::fstream infile(filename);
 
-<<<<<<< Updated upstream
-
-
-
-
-
-std::vector<Airport> readAirportCSV(std::string filename) {
-    std::vector<Airport> airports;
-    std::vector<std::string> test;
-    std::fstream infile(filename);
-
-     // Make sure the file is open
-    if(!infile.is_open()) throw std::runtime_error("Could not open file");
-=======
 //      // Make sure the file is open
 //     if(!infile.is_open()) throw std::runtime_error("Could not open file");
->>>>>>> Stashed changes
     
 //     std::string line, field;
 //     while (std::getline(infile,line)) {
