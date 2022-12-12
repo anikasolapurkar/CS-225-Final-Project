@@ -22,8 +22,12 @@ ENTRYPOINT bash" in there.
 
 To Run the Program:
 
-* type 'make' in the terminal and wait for the program to compile.
-* type './main' to see the results of test cases and the real world data set.
+* Delete the current build folder after cloning our repo.
+* In the terminal, create a build directory using 'mkdir build'.
+* In the terminal, go into the build folder.
+* In the terminal, create cmake files using 'cmake ..'. 
+* Type 'make' in the terminal and wait for the program to compile.
+* Type './main' to see the results of test cases and the real world data set.
 ## Test Description
 Our tests check for the following in main.cpp:
 * Constructing the graph
