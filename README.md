@@ -25,7 +25,7 @@ To Run the Program:
 * type 'make' in the terminal and wait for the program to compile.
 * type './main' to see the results of test cases and the real world data set.
 ## Test Description
-Our tests check for:
+Our tests check for the following in main.cpp:
 * Constructing the graph
 * BFS -- getting to the correct target location
 * BFS traversal -- moving in the correct order
