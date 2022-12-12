@@ -7,7 +7,7 @@ class PageRank {
     public:
     PageRank();
     void createTransition(int num, double d); 
-    vector<double> rank(vector<double> initial, int time, bool store);
+    vector<double> rank(vector<double> init, int time, bool store);
     vector<int> bestairport(int num);
     vector<double> vec_initial();
     void print_adjmatrix();
