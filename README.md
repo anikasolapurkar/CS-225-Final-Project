@@ -19,7 +19,9 @@ Setting up a virtual Docker environment on your laptop if you do not already hav
 * Inside the final project directory, create a Dockerfile and copy paste "FROM gcevans/cs225-container:fa22
 ENTRYPOINT bash" in there.
 * On VSCode, use Remote-Container: Open Folder in Container to open up the project and then select "From Dockerfile".
+
 To Run the Program:
+
 * type 'make' in the terminal and wait for the program to compile.
 * type './main' to see the results of test cases and the real world data set.
 ## Test Description
