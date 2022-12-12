@@ -1,6 +1,4 @@
 #include "AirportGraph.h"
-#include "PageRank.h"
-
 #include <math.h> 
 #include <vector>
 #include <string>
@@ -9,112 +7,134 @@
 #include <sstream>
 #include <fstream>
 
-//DONE
-Graph::Graph(){}
 
-//DONE    
-Graph::Graph(std::string & airportFile, std::string & routesFile) {
+using namespace std;
+
+
+//default constructor
+Graph::Graph(){
+
+}
+
+
+//constructor with airport.dat and routes.dat
+//it calls the two helper functions
+Graph::Graph(std::string & airportFile, std::string & routesFile){
+    //std::cout << __LINE__ << std::endl;
     insertAllVertices(airportFile);
     insertAllEdge(routesFile);
+    
+
 }
 
-//DONE    
-void Graph::insertVertex(int v, Airport ap) {
+
+//construct the vertices 
+//such that each airport object is connected with its ID
+void Graph::insertVertex(int v, Airport ap)
+{
+    //std::cout << __LINE__ << std::endl;
     vertices[v] = ap;
+    //std::cout << __LINE__ << std::endl;
 }
 
 
-//DONE
-//traverses airport.dat and inserts a vertex for each Airport
-void Graph::insertAllVertices(std::string & fileName) {
+//takes airport.dat and insert each airport into the class line by line
+void Graph::insertAllVertices(std::string & fileName)
+{
+    
     std::fstream file;
+    //open the file
     file.open(fileName, ios::in);
     if (file.is_open()){   
         std::string currLine;
+        //iterate through each line of the file
         while(getline(file, currLine)){ 
-            //if a line has insufficient information, then just discard it, only add if it has 13 lines
-            int comma = 0;
+            //if a line has insufficient information, 
+            //discard the line by returning default vector
+            int commas = 0;
+            
             for(unsigned i = 0; i < currLine.size(); ++i){
+                //std::cout << __LINE__ << std::endl;
                 char current = currLine[i];
-                if(current == ',')
-                    comma++;
+                if(current == ',') {
+                    commas++;
+                }
             }
-            if(comma == 13){
+            //std::cout << commas << std::endl;
+            if(commas == 13){
                 //create and insert an airport object from current line in file
+                
                 Airport ap(currLine);
+                
                 insertVertex(ap.getID(), ap);
+            
             }
         }
         file.close(); 
     }
-
+    
 }
 
 
-//DONE     
-vector<std::string> Graph::createEdgeHelper(std::string & line){
+std::vector<std::string> Graph::createEdgeHelper(string & line){
     std::string currString = "";
-    std::vector<std::string> flightVector;
+    std::vector<std::string> vect;
 
-    //if a line has insufficient information, 
-    //discard the line by returning default vector
     int comma = 0;
     for(size_t i = 0; i < line.size(); ++i){
         char current = line[i];
         if(current == '\\')
-            return flightVector;
+            return vect;
         if(current == ',')
             comma++;
     }
-    if(comma != 8) {
-        return flightVector;
-    }
-
-   //push back each string into a vector of each line in the data file
+    if(comma != 8)
+        return vect;
+    
+    // Iterate through all characters in the line
     for(size_t i = 0; i < line.size(); ++i){
-        char current = line[i];
-        //if a comma exists, then push the string into the vector
-        if(current == ',') {
-            flightVector.push_back(currString);
+        char curr = line[i];
+        //if a comma is detected, push the current string to the vector
+        if(curr == ',') {
+            vect.push_back(currString);
             currString = "";
         }
-        else {
-            currString += current;
-        }
+        //otherwise if it's just a regular char, append it to the current string
+        else
+            currString += curr;
     }
-    return flightVector;
+
+    return vect;
 }
 
 
-//DONE
-Route Graph::createEdge(vector<std::string> flightVector) {
-    int source = std::stoi(flightVector[3]);
-    int destination = std::stoi(flightVector[5]);
-    auto svertex = vertices.find(source);
-    auto dvertex = vertices.find(destination);
-    //check if the source and dest airports are already inserted
-    //only inserts when the route does not exist already
-    if (svertex != vertices.end() && dvertex != vertices.end()) {
-        double weight = calcWeight(source, destination);
-        return Route(source, destination, weight);
-    } else {
-        return Route();
+
+Route Graph::createEdge(std::vector<std::string> flightVector){
+    int source = stoi(flightVector[3]);
+    int dest = stoi(flightVector[5]);
+    auto it = vertices.find(source);
+    auto it2 = vertices.find(dest);
+    
+    if(it != vertices.end() && it2 != vertices.end()){
+        double weight = calcWeight(source, dest);
+        return Route(source, dest, weight);
     }
+    return Route();
+}
 
-}   
 
-//DONE
-void Graph::insertEdge(Route r){
+
+void Graph::insertEdge(Route r){       
     int source = r.getSourceId();
-    int destination = r.getDestId();
+    int dest = r.getDestId();
 
-    if (vertices[source].destAPs.find(destination) == vertices[source].destAPs.end())   
-        (vertices[source].destAPs)[destination] = r;
-
+    if (vertices[source].destAPs.find(dest) == vertices[source].destAPs.end())   
+        (vertices[source].destAPs)[dest] = r;
 }
 
 
-//DONE
+//similar to insert all vertices
+//iterates through routes.dat and insert flight for each line 
 void Graph::insertAllEdge(std::string & fileName){
     std::fstream file;
     //open the file
@@ -124,13 +144,13 @@ void Graph::insertAllEdge(std::string & fileName){
                     
         //iterate through each line of the file
         while(getline(file, currLine)){ 
-            std::vector<std::string> currVect = createEdgeHelper(currLine); //each line as a vector in the aiport.dat
+            std::vector<std::string> vect = createEdgeHelper(currLine);
             
-            if(currVect != std::vector<std::string>()){
-                Route f = createEdge(currVect);
-                Route defaults = Route();
-                if(!(f == defaults))
-                    insertEdge(f);
+            if(vect != std::vector<std::string>()){
+                Route r = createEdge(vect);
+                Route defaultr = Route();
+                if(!(r == defaultr))
+                    insertEdge(r);
             }
         }
         file.close(); 
@@ -138,14 +158,13 @@ void Graph::insertAllEdge(std::string & fileName){
 }
 
 
-//NEXT THREE RETURN GRAPH
+
 unordered_map<int, Airport> Graph::getVertices(){
     return vertices;
 }
 
 
-//returns the flights coming out of the given airport
-//for testing: iterate though the unordered_map to see inserted flights
+
 unordered_map<int, Route> Graph::adjVertWithWeight(int airportID) {
     auto it = vertices.find(airportID);
     if(it != vertices.end()){
@@ -163,62 +182,59 @@ string Graph::getAPName(int ID){
     return string();
 }
 
-//DONE
-double Graph::calcWeight(int source, int dest) {
-    double lat1 = radianConvert(vertices[source].getLatitude());
-    double lon1 = radianConvert(vertices[source].getLongitude());
-    double lat2 = radianConvert(vertices[dest].getLatitude());
-    double lon2 = radianConvert(vertices[dest].getLongitude());
-     
-    long double dlong = lon2 - lon1;
-    long double dlat = lat2 - lat1;
- 
-    long double ans = pow(sin(dlat / 2), 2) + cos(lat1) * cos(lat2) * pow(sin(dlong / 2), 2);
- 
+
+
+double Graph::calcWeight(int fromID, int toID){
+    double latitude1 = radianConvert(vertices[fromID].getLatitude());
+    double longitude1 = radianConvert(vertices[fromID].getLongitude());
+    double latitude2 = radianConvert(vertices[toID].getLatitude());
+    double longitude2 = radianConvert(vertices[toID].getLongitude());
+
+    //calculate the difference
+    double lonDiff = longitude2 - longitude1;
+    double latDiff = latitude2 - latitude1;
+    
+    //using Haversine Formula, R is radious of earth in KM
+    long double ans = pow(sin(latDiff / 2), 2) +cos(latitude1) * cos(latitude2) * pow(sin(lonDiff / 2), 2);
     ans = 2 * asin(sqrt(ans));
-    long double R = 6371;
-    ans = ans * R;
-    return ans;
+    double R = 6371;
+    ans *= R;
+    return ans; 
 }
 
-//DONE
-double Graph::radianConvert(double degree) {
+
+//helper function to calcWeight
+double Graph::radianConvert(double degree)
+{
     long double one_deg = (M_PI) / 180;
     return (one_deg * degree);
 }
+ 
 
+//traversal graph to populate adj matrix for pagerank
+void Graph::adjMatrix(PageRank *matr){
 
-
-
-void Graph::adjMatrix(PageRank *pr_obj){
-
-    //determine and set the dimention
     int size = vertices.size();
-    pr_obj->adjacency.resize(size,vector<double>(size));
-    pr_obj->airport_id.resize(size);
-    pr_obj->num = size;
+    matr->adjacency.resize(size,vector<double>(size));
+    matr->airport_id.resize(size);
+    matr->num = size;
 
 
-    //initialize obj matrix
     for(int i = 0; i < size; i++){
         for(int j = 0; j < size; j++){
-            pr_obj->adjacency[i][j] = 0.0;
+            matr->adjacency[i][j] = 0.0;
         }        
     }
 
-    //populate the namelist of pagerank obj
     int x = 0;
     for(auto it = vertices.begin(); it != vertices.end(); ++it){
         if(it->second.getID() == 0){
             continue;
         }
-        pr_obj->airport_id[x] = (it->second.getID());
+        matr->airport_id[x] = (it->second.getID());
         x++;     
     }
     
-
-    //check every flight of every airport
-    //put the weight into the adj matrix according to the order of the namelist
     x = 0;
     for(auto it = vertices.begin(); it != vertices.end(); ++it){
         if(x == size) break;
@@ -230,12 +246,12 @@ void Graph::adjMatrix(PageRank *pr_obj){
         for(auto flight = it->second.destAPs.begin(); flight != it->second.destAPs.end(); ++flight){
             int y = 0;
             //find out the proper place for the weight of the current flight according to the namelist
-            for (auto temp = pr_obj->airport_id.begin(); temp != pr_obj->airport_id.end(); ++temp) {
+            for (auto temp = matr->airport_id.begin(); temp != matr->airport_id.end(); ++temp) {
                 if (*temp == flight->second.getDestId()) break;
                 y++;
             } 
             if(y == size) break;
-            pr_obj->adjacency[y][x] = flight->second.getWeight();
+            matr->adjacency[y][x] = flight->second.getWeight();
         }
         x++;
     }

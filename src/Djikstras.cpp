@@ -3,7 +3,7 @@
 #include <climits>
 #include <stack>
 
-using namespace std;
+using namespace std; 
 
 std::vector<int> Djikstras::finalvector(int currentVertex, std::vector<int> parents) {
    std::vector<int> final_vect;
@@ -15,35 +15,39 @@ std::vector<int> Djikstras::finalvector(int currentVertex, std::vector<int> pare
    return final_vect;
 }
 
-std::vector<int> Djikstras::dijkstra(std::vector<std::vector<int>> adjacencyMatrix, int startVertex, int destination) {
-   int verticesNum = adjacencyMatrix[0].size();
-   vector<int> shortestDistances(verticesNum);
-   vector<bool> added(verticesNum);
-   for (int vertexIndex = 0; vertexIndex < verticesNum; vertexIndex++) {
-      shortestDistances[vertexIndex] = INT_MAX;
-      added[vertexIndex] = false;
+std::vector<int> Djikstras::dijkstra(std::vector<std::vector<int>> adjacencyMatrix, int src, int destination) {
+   int vertices = adjacencyMatrix[0].size();
+   vector<int> distances(vertices);
+   vector<bool> added(vertices);
+
+   for (int i = 0; i < vertices; i++) {
+      distances[i] = INT_MAX;
+      added[i] = false;
    }
-   shortestDistances[startVertex] = 0;
-   vector<int> prev(verticesNum);
-   prev[startVertex] = -1;
-   for (int i = 1; i < verticesNum; i++) {
-      int nearestVertex = -1;
-      int shortestDistance = INT_MAX;
-      for (int vertexIndex = 0; vertexIndex < verticesNum; vertexIndex++) {
-         if (!added[vertexIndex] && shortestDistances[vertexIndex] < shortestDistance) {
-            nearestVertex = vertexIndex;
-            shortestDistance = shortestDistances[vertexIndex];
+
+   distances[src] = 0;
+   std::vector<int> prev(vertices);
+   prev[src] = -1;
+
+   for (int i = 1; i < vertices; i++) {
+      int neighbor = -1;
+      int shortest = INT_MAX;
+      for (int j = 0; j < vertices; j++) {
+         if (!added[j] && distances[j] < shortest) {
+            neighbor = j;
+            shortest = distances[j];
          }
       }
-      added[nearestVertex] = true;
-      for (int vertexIndex = 0; vertexIndex < verticesNum; vertexIndex++) {
-         int edgeDistance = adjacencyMatrix[nearestVertex][vertexIndex];
-         if (edgeDistance > 0 && ((shortestDistance + edgeDistance) < shortestDistances[vertexIndex])) {
-            prev[vertexIndex] = nearestVertex;
-            shortestDistances[vertexIndex] = shortestDistance + edgeDistance;
+      added[neighbor] = true;
+      for (int j = 0; j < vertices; j++) {
+         int dist = adjacencyMatrix[neighbor][j];
+         if (dist > 0 && ((shortest + dist) < distances[j])) {
+            prev[j] = neighbor;
+            distances[j] = shortest + dist;
          }
       }
    }
+
    std::vector<int> final_vect;
    final_vect = finalvector(destination, prev);
    return final_vect;

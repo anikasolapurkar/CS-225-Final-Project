@@ -34,7 +34,7 @@ class Graph {
         //function to harvest adjmatrix from a graph obj
         
         //ADD BACK
-        void adjMatrix(PageRank* pr_obj);
+        void adjMatrix(PageRank* matr);
 
         unordered_map<int, Airport> vertices;
 

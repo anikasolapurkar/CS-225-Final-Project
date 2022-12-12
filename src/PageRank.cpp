@@ -29,18 +29,18 @@ void PageRank::createadjacency(int num, double d) {
             for(int j = 0; j < num; j++){
                 adjacency[j][i] = 1/(double)num;
             }              
-        }
-
-        for(int j = 0; j < num; j++){
+        } else {
+            for(int j = 0; j < num; j++){
             adjacency[j][i] = (adjacency[j][i]/sum)*(d+factor);
-        }             
+         }             
+        }
     }
 }
 
 //perform pagerank algorithm and stores result in vector
-vector<double> PageRank::rank(vector<double> initial, int time, bool store) {
-    vector<double> vec = initial;
-    vector<double> vec2 = initial;
+vector<double> PageRank::rank(vector<double> init, int time, bool store) {
+    vector<double> vec = init;
+    vector<double> vec2 = init;
     for(int t = 0; t < time; t++){
         for(int i = 0; i < num; i++){
             vec2[i] = 0;
@@ -65,32 +65,32 @@ vector<double> PageRank::rank(vector<double> initial, int time, bool store) {
 
 
 //pick out the most important airport
-vector<int> PageRank::top_airport(int num){
-    int pos = 0;
-    vector<double> biggest(num);
+vector<int> PageRank::bestairport(int num){
     vector<int> airport(num);
+    vector<double> biggest(num);
+    int pos = 0;
     for(int i = 0; i < num; i++){
-        double maximum = 0;
-        for(auto j = page_rank.begin(); j != page_rank.end(); j++){
-            if(maximum < i){
-                bool val = true;
-                for(auto k = biggest.begin(); k != biggest.end(); ++k){
-                    if(*j == *k) {
-                        val = false;
+        double max = 0;
+        for(auto it = page_rank.begin(); it != page_rank.end(); ++it){
+            if(*it > max){
+                bool flag = true;
+                for(auto temp = biggest.begin(); temp != biggest.end(); ++temp){
+                    if(*temp == *it) {
+                        flag = false;
                         break;
                     }
                 }
-                if(val)
-                    maximum = i;
+                if(flag)
+                    max = *it;
             }
         }
-        biggest[pos] = (maximum);
+        biggest[pos] = (max);
         pos++;
     }
     pos = 0;
     for(int i = 0; i < num; i++){
         int counter = 0;
-        for(auto it = page_rank.begin(); it != page_rank.end(); it++){
+        for(auto it = page_rank.begin(); it != page_rank.end(); ++it){
             if(biggest[i] == *it){
                 airport[pos] = (airport_id[counter]);
                 pos++;
@@ -98,7 +98,7 @@ vector<int> PageRank::top_airport(int num){
             counter++;
         }
     }
-    //printing out the top airport 
+    //prints out the top airport 
     cout<<"top "; 
     cout<<num; 
     cout<<" important airport\n"; 
@@ -142,4 +142,3 @@ void PageRank::print_adjmatrix(){
     }
     cout<<"\n";
 }
-

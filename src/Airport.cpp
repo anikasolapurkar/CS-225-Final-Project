@@ -6,43 +6,58 @@ Airport::Airport(){
     name_ = "";
     latitude_ = 0.0;
     longitude_ = 0.0;
-}
+} 
 
-Airport::Airport(string &line) {
-    std::string str = "";
-    std::vector<std::string> vector;
-    bool q = false;
+
+Airport::Airport(string &line){
+    
+    bool flag = false;
+    std::string currS = "";
+    std::vector<std::string> vect;
+
     for(size_t i = 0; i < line.size(); ++i){
-        char curr = line[i];
-        if(!q) {
-            if(curr == ',') {
-                vector.push_back(str);
-                str = "";
+        char current = line[i];
+
+        if(flag == false) {
+            
+            if(current == ',') {
+                vect.push_back(currS);
+                currS = "";
             }
-            else if(curr == '"') {
-                     q = true;
+            
+            else if(current == '"') {
+                flag = true;
             }
-            str += curr;
+    
+            else {
+                currS += current;
+            }
         }
-        else {
-            if (curr == '"' && i+1 < line.size()) {
+        
+        else{
+            
+            if(current == '"' && i+1 < line.size()) {
                 if(line[i+1] == '"') {
-                    str += '"';
+                    currS += '"';
                     i++;
                 }
+                
                 else {
-                    q = false;
-
+                    flag = false;
                 }
             }
-            str += curr;
+            else
+                currS = currS + current;
         }
     }
-    id_ = stoi(vector[0], nullptr);
-    name_ = vector[1];
-    latitude_ = stod(vector[6], nullptr);
-    longitude_ = stod(vector[7], nullptr);
+    
+    //updating private variables
+    id_ = stoi(vect[0]);
+    name_ = vect[1];
+    latitude_ = stod(vect[6]);
+    longitude_ = stod(vect[7]);
 }
+
 
 Airport::Airport(int id, std::string name, double latitude, double longitude) {
     id_ = id;
