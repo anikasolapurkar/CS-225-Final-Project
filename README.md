@@ -1,8 +1,8 @@
 # CS 225 Final Project: OpenFlights
 ## Team Members: akansal3-amehta58-jsh7-anikaas2
 ## Deliverables **(also located in the main branch)**
-* Final Report
-* Final Presentation Slides
+* Final Report (https://docs.google.com/document/d/1kjOg-c4Xgn6BW5IbPelN-4nkI0Y-n2Mt81UZM1ifftc/edit?usp=sharing)
+* Final Presentation Slides (https://docs.google.com/presentation/d/1lhA2Qs8EKgJKitI2g0-CC5fffh4ZFWC0PytPVK2guUw/edit?usp=sharing)
 * Final Presentation Video
 ## Introduction 
 In our project, we investigate the real-world applications of graph-data structures using the Open Flights dataset in conjunction with a path finding algorithm and a traversal. We intend to use the dataset provided to us in class (https://openflights.org/data.html). Specifically, we hope to find the shortest path between the United States and Europe, as well as the shortest path between different landmarks. We will use the nearest airport to each corresponding location and construct a route based on the shortest path using BFS traversal, Dijkstra's algorithm, and a Page Rank algorithm.
@@ -29,4 +29,5 @@ Our tests check for:
 * BFS traversal -- moving in the correct order
 * Dijkstra's algorithm
 * Reading and parsing dataset
+* Page Rank algorithm -- creating the adjacency matrix
 * Page Rank algorithm
