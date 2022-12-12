@@ -12,14 +12,19 @@ PageRank::PageRank(){}
 //initalizes the intitial vector passed into PageRank
 vector<double> PageRank::vec_initial(){
     vector<double> init(this->num);
+    double sum = 0.0;
     for(int i = 0; i < this->num; i++){
-        init[i] = rand();
+        init[i] = rand() % 10 + 1;
+        sum += init[i];
+    }
+    for(int i = 0; i < this->num; i++){
+        init[i] /= sum;
     }
     return init;
 }
 
 //adjusts the adjacency matrix 
-void PageRank::createadjacency(int num, double d) {
+void PageRank::createTransition(int num, double d) {
     this->num = num;
     double factor = (1-d)/num;
     for(int i = 0; i < num; i++){
@@ -33,7 +38,7 @@ void PageRank::createadjacency(int num, double d) {
             }              
         } else {
             for(int j = 0; j < num; j++){
-            adjacency[j][i] = (adjacency[j][i]/sum)*(d+factor);
+            adjacency[j][i] = (adjacency[j][i]/sum*d)+(factor);
          }             
         }
     }
@@ -51,10 +56,10 @@ vector<double> PageRank::rank(vector<double> init, int time, bool store) {
                 if(store) {
                     double sum = 0;
                     for(std::vector<double>::iterator it = vec2.begin(); it != vec2.end(); it++)
-                        sum += (*it)*(*it);
-                    double s = sqrt(sum);
+                        sum += (*it);
+                    //double s = sqrt(sum);
                     for(int k = 0; k < num; k++){
-                        vec2[k] = vec2[k] / s;
+                        vec2[k] = vec2[k] / sum;
                     }
                 }
             }     
@@ -101,13 +106,13 @@ vector<int> PageRank::bestairport(int num){
         }
     }
     //prints out the top airport 
-    cout<<"top "; 
-    cout<<num; 
-    cout<<" important airport\n"; 
-    for(int i = 0; i < num; i++){
-        cout<<airport[i];
-        cout<<"\n";
-    }
+    // cout<<"top "; 
+    // cout<<num; 
+    // cout<<" important airport\n"; 
+    // for(int i = 0; i < num; i++){
+    //     cout<<airport[i];
+    //     cout<<"\n";
+    // }
     return airport;
 }
 

@@ -251,7 +251,10 @@ void Graph::adjMatrix(PageRank *matr){
                 y++;
             } 
             if(y == size) break;
-            matr->adjacency[y][x] = flight->second.getWeight();
+           // matr->adjacency[y][x] = flight->second.getWeight();
+            if (flight->second.getWeight() > 0) {
+                matr->adjacency[y][x] = 1.0;
+            }
         }
         x++;
     }

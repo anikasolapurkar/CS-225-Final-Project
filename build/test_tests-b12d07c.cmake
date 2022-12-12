@@ -1,1 +1,7 @@
-set( test_TESTS)
+add_test( [==[Parsing entire airport database]==] /workspaces/final/CS-225-Final-Project/build/test [==[Parsing entire airport database]==]  )
+set_tests_properties( [==[Parsing entire airport database]==] PROPERTIES WORKING_DIRECTORY /workspaces/final/CS-225-Final-Project/build)
+add_test( [==[Testing PageRank with SMALL airport and route databases]==] /workspaces/final/CS-225-Final-Project/build/test [==[Testing PageRank with SMALL airport and route databases]==]  )
+set_tests_properties( [==[Testing PageRank with SMALL airport and route databases]==] PROPERTIES WORKING_DIRECTORY /workspaces/final/CS-225-Final-Project/build)
+add_test( [==[Testing PageRank with ENTIRE airport and route databases]==] /workspaces/final/CS-225-Final-Project/build/test [==[Testing PageRank with ENTIRE airport and route databases]==]  )
+set_tests_properties( [==[Testing PageRank with ENTIRE airport and route databases]==] PROPERTIES WORKING_DIRECTORY /workspaces/final/CS-225-Final-Project/build)
+set( test_TESTS [==[Parsing entire airport database]==] [==[Testing PageRank with SMALL airport and route databases]==] [==[Testing PageRank with ENTIRE airport and route databases]==])

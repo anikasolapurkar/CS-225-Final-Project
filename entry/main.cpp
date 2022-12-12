@@ -122,7 +122,7 @@ int main(int argc, char** argv)
     p_r->airport_id.resize(size);
     p_r->num = size;
 
-    p_r->PageRank::createadjacency(size, 0.85);
+    p_r->PageRank::createTransition(size, 0.85);
     cout << (0.5 == p_r->adjacency[0][0]) << endl;
     cout << (0.5 == p_r->adjacency[1][0]) << endl;
     cout <<(1 == p_r->adjacency[0][1] + p_r->adjacency[1][1]) << endl;
