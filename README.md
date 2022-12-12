@@ -9,8 +9,8 @@ In our project, we investigate the real-world applications of graph-data structu
 ## File description(code and data)
 * All classes are located in the **src folder**
 * Airport Class: the Airport class is used for defining the vertices of our graph structure. Each airport is constructed with a name, latitude, and longitude coordinates. Data is retrieved from (airport.dat)
-* Route Class : used to create airport graph structure. 
-* airport_graph : This is our graphs class that supports the creation and insertion of vertices and edges
+* Route Class : used to create airport graph structure
+* airport_graph : Supports the creation and insertion of vertices and edges
 * BFS : Implementation of a BFS graph traversal
 * Djikstras : Implementation of Djikstra's algorithm to find shortest path
 * PageRank : Implementation of the Page Rank algorithm
