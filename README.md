@@ -25,7 +25,7 @@ To Run the Program:
 * Delete the current build folder after cloning our repo.
 * In the terminal, create a build directory using 'mkdir build'.
 * In the terminal, go into the build folder.
-* In the terminal, create cmake files using 'cmake ..'. 
+* In the terminal, create cmake files using ' cmake .. '. 
 * Type 'make' in the terminal and wait for the program to compile.
 * Type './main' to see the results of test cases and the real world data set.
 ## Test Description
