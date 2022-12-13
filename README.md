@@ -16,8 +16,8 @@ In our project, we investigate the real-world applications of graph-data structu
 * PageRank : Implementation of the Page Rank algorithm
 ## How to run the program
 Setting up a virtual Docker environment on your laptop if you do not already have one:
-* Inside the final project directory, create a Dockerfile and copy paste "FROM gcevans/cs225-container:fa22
-ENTRYPOINT bash" in there.
+* Inside the your directory, create a Dockerfile and copy paste "FROM gcevans/cs225-container:fa22
+ENTRYPOINT bash" in there. Make sure the Dockerfile is not inside the cloned repo directory "CS-225-Final-Project", rather just outside of it. In other words, the cloned repo directory and the Dockerfile should be sibling folders.
 * On VSCode, use Remote-Container: Open Folder in Container to open up the project and then select "From Dockerfile".
 
 To Run the Program:
