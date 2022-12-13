@@ -259,3 +259,48 @@ void Graph::adjMatrix(PageRank *matr){
         x++;
     }
 }
+
+void Graph::populateAdjWeighted() {
+    int size = vertices.size();
+    adjWeighted.resize(size,vector<double>(size));
+    airport_id.resize(size);
+
+
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < size; j++){
+            adjWeighted[i][j] = 0.0;
+        }        
+    }
+
+    int x = 0;
+    for(auto it = vertices.begin(); it != vertices.end(); ++it){
+        if(it->second.getID() == 0){
+            continue;
+        }
+        airport_id[x] = (it->second.getID());
+        x++;     
+    }
+    
+    x = 0;
+    for(auto it = vertices.begin(); it != vertices.end(); ++it){
+        if(x == size) break;
+        if(it->second.getID() == 0){
+            continue;
+        }
+
+        //check the flights of the current vertices/airport
+        for(auto flight = it->second.destAPs.begin(); flight != it->second.destAPs.end(); ++flight){
+            int y = 0;
+            //find out the proper place for the weight of the current flight according to the namelist
+            for (auto temp = airport_id.begin(); temp != airport_id.end(); ++temp) {
+                if (*temp == flight->second.getDestId()) break;
+                y++;
+            } 
+            if(y == size) break;
+            adjWeighted[y][x] = flight->second.getWeight();
+            
+        }
+        x++;
+    }
+
+}

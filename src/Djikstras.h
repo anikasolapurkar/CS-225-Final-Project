@@ -14,8 +14,9 @@ using namespace std;
 
 class Djikstras {
     public:
+        // Djikstras(const string &airportFile, const string &routeFile);
         std::vector<int> finalvector(int currentVertex, std::vector<int> parents);
-        std::vector<int> dijkstra(std::vector<std::vector<int>> adjacencyMatrix, int startVertex, int destination);
+        std::vector<int> dijkstra(std::vector<std::vector<double>> adjacencyMatrix, int startVertex, int destination);
     private:
         
 };

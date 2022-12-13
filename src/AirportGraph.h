@@ -35,9 +35,13 @@ class Graph {
         
         //ADD BACK
         void adjMatrix(PageRank* matr);
+        void populateAdjWeighted();
+
+        
 
         unordered_map<int, Airport> vertices;
-
+        std::vector<std::vector<double>> adjWeighted;
+        vector<int> airport_id; 
 
     private:
         //functions that calculate the weight of an edge
@@ -45,5 +49,5 @@ class Graph {
         double radianConvert(double degree);
         
         //each graph object hosts a map of airports to its corresponding ID
-        
+        //populate adjWeighted
 };
